@@ -3,6 +3,7 @@
 """
 A simple python script to convert RepeatMasker output files from
 GFF2 format to GFF3, and include repeat_class annotation information
+GITHUB Repo: https://github.com/Nevada-Bioinformatics-Center/repeatmasker_gff2_to_gff3
 """
 
 import sys
@@ -64,7 +65,7 @@ def main(arguments):
         date_time = now.strftime("%m/%d/%Y, %H:%M:%S")
         o.write("##gff-version 3\n")
         o.write("##Generated using repeatmasker_gff2_to_gff3.py on %s\n" % date_time)
-        o.write("##repeatmasker_gff2_to_gff3.py can be found at URL: \n")
+        o.write("##repeatmasker_gff2_to_gff3.py can be found at URL: https://github.com/Nevada-Bioinformatics-Center/repeatmasker_gff2_to_gff3 \n")
         with args.gff2 as f:
             for line in f:
                 if "#" not in line:
