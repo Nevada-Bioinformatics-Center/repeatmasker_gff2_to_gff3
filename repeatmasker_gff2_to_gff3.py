@@ -23,6 +23,7 @@ def main(arguments):
         formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument('tablefile', help="Input *.ori.out file from RepeatMasker (looks like a table)", type=argparse.FileType('r'))
     parser.add_argument('-g', '--gff2', help="Input GFF2 file", type=argparse.FileType('r'))
+    parser.add_argument('-t', '--tag', help="Tag to use when generating unique IDs in the GFF3 file", default="csc")
     parser.add_argument('-o', '--outfile', help="Output file", default=sys.stdout, type=argparse.FileType('w'))
     args = parser.parse_args(arguments)
 
@@ -83,8 +84,8 @@ def main(arguments):
                     else:
                         repeat_class = matchtext
 
-                    new_group = "ID=TE.%s.csc.repeat%09d;Name=TE.%s.csc.repeat%09d;repeat_match=%s;repeat_class=%s;" %  (contig, repeat_num, 
-                        contig, repeat_num, matchtext, repeat_class.replace("/", "%2F"))
+                    new_group = "ID=TE.%s.%s.repeat%09d;Name=TE.%s.%s.repeat%09d;repeat_match=%s;repeat_class=%s;" %  (contig, args.tag, repeat_num, 
+                        contig, args.tag, repeat_num, matchtext, repeat_class.replace("/", "%2F"))
 
                     o.write("\t".join([contig,source,"repeat_region",start,end,score,strand,phase,new_group]) + "\n")
 
